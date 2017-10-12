@@ -1,0 +1,13 @@
+<p>
+    videos-list works!
+</p>
+<div>
+    <span>Playlist id:</span><input [(ngModel)]="playlistId" />
+    <button (click)="retrievePlaylist();">Search</button>
+</div>
+<div *ngIf="resultJson">
+    Result...
+    <pre> 
+        {{ resultJson | json }}
+    </pre>
+</div>
