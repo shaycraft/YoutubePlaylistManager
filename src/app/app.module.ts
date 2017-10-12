@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { VideosListComponent } from './videos-list/videos-list.component';
 import { ToastrService } from './services/toastr.service';
 import { CustomToastrOptions } from './custom_toastr_options';
+import { YoutubeApiService } from './services/youtube-api.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { CustomToastrOptions } from './custom_toastr_options';
     ToastModule.forRoot(),
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpModule
   ],
   providers: [
     ToastrService,
-    { provide: ToastOptions, useClass: CustomToastrOptions }
+    { provide: ToastOptions, useClass: CustomToastrOptions },
+    YoutubeApiService
   ],
   bootstrap: [AppComponent]
 })
