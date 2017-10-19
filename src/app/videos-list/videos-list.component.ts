@@ -11,8 +11,8 @@ import { YoutubeApiService } from '../services/youtube-api.service';
 })
 export class VideosListComponent implements OnInit, OnDestroy {
 
-  private playlistId: string;
-  private resultJson: any;
+  public playlistId: string;
+  public resultJson: any;
   private toastr: ToastsManager;
   private subscription: Subscription;
 
@@ -31,7 +31,7 @@ export class VideosListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private retrievePlaylist(): void {
+  public retrievePlaylist(): void {
     if (!this.playlistId) {
       this.toastr.error('Please provide a playlist id');
       return;
