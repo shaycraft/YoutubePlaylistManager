@@ -4,4 +4,6 @@
         Welcome to {{title}}!
     </h1>
 </div>
+<div *ngIf="IsAuthenticated === false">You are NOT authenticated.  <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=769089562908-q38pfih651l28ikrd8b1h5aif80bl1kf.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A4200&response_type=token&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube">Sign into google</a></div>
+<div *ngIf="IsAuthenticated">You ARE authenticated</div>
 <router-outlet></router-outlet>

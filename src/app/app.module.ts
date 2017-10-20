@@ -14,6 +14,7 @@ import { VideosListComponent } from './videos-list/videos-list.component';
 import { ToastrService } from './services/toastr.service';
 import { CustomToastrOptions } from './custom_toastr_options';
 import { YoutubeApiService } from './services/youtube-api.service';
+import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HttpModule } from '@angular/http';
   providers: [
     ToastrService,
     { provide: ToastOptions, useClass: CustomToastrOptions },
-    YoutubeApiService
+    YoutubeApiService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
