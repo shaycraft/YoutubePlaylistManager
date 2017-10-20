@@ -3,6 +3,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ToastrService } from '../services/toastr.service';
 import { Subscription } from 'rxjs/Subscription';
 import { YoutubeApiService } from '../services/youtube-api.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-videos-list',
@@ -16,12 +17,16 @@ export class VideosListComponent implements OnInit, OnDestroy {
   private toastr: ToastsManager;
   private subscription: Subscription;
 
-  constructor(private toastrService: ToastrService, private vcr: ViewContainerRef, private apiService: YoutubeApiService) {
+  constructor(private toastrService: ToastrService, private vcr: ViewContainerRef, private apiService: YoutubeApiService, private authService: AuthService) {
     this.toastr = this.toastrService.manager();
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit(): void {
+    if (this.authService.IsAuthenticated()) {
+      console.log('In videos-list.component, is authenticated, token=', this.authService.GetToken());
+    }
+
   }
 
   ngOnDestroy(): void {
