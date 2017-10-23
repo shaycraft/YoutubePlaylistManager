@@ -1,6 +1,7 @@
 import { Component, OnInit, isDevMode } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,20 @@ export class AppComponent implements OnInit {
   public oauth_url: string;
 
 
-  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute) {
+  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private toastr: ToastsManager) {
 
     this.activatedRoute.fragment.subscribe((fragment: string) => {
       if (fragment) {
         let qstringParsed = this.parseQueryString(fragment);
-        this.IsAuthenticated = true;
-        this.authService.SetToken(qstringParsed.access_token);
+
+        // validate token
+        this.authService.ValidateToken(qstringParsed.access_token)
+          .subscribe((res) => {
+            this.IsAuthenticated = true;
+            this.authService.SetToken(qstringParsed.access_token);
+            this.toastr.success('Token validated successfully');
+            console.log(res);
+          }, err => this.handleError(err));
       }
       else {
         this.IsAuthenticated = false;
@@ -44,7 +52,11 @@ export class AppComponent implements OnInit {
       let keyVal = parts[i].split('=');
       result[keyVal[0]] = keyVal[1];
     }
-    
+
     return result;
+  }
+
+  private handleError(err: any): void {
+    this.toastr.error(`ERROR:  ${err}`);
   }
 }
