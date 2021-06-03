@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/router": "^6.1.10",
     "core-js": "^2.4.1",
-    "ng2-toastr": "^4.1.2",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.0.0-rc.0",
     "zone.js": "^0.8.29"

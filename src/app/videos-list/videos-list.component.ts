@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewContainerRef, OnDestroy } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from '../services/toastr.service';
 import { Subscription } from 'rxjs/Subscription';
 import { YoutubeApiService } from '../services/youtube-api.service';
@@ -14,12 +13,11 @@ export class VideosListComponent implements OnInit, OnDestroy {
 
   public playlistId: string;
   public resultJson: any;
-  private toastr: ToastsManager;
+  private toastr: any;
   private subscription: Subscription;
 
-  constructor(private toastrService: ToastrService, private vcr: ViewContainerRef, private apiService: YoutubeApiService, private authService: AuthService) {
+  constructor(private toastrService: ToastrService, private apiService: YoutubeApiService, private authService: AuthService) {
     this.toastr = this.toastrService.manager();
-    this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit(): void {
