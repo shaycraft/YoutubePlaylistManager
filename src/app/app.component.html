@@ -4,6 +4,6 @@
         Welcome to {{title}}!
     </h1>
 </div>
-<div *ngIf="IsAuthenticated === false">You are NOT authenticated.  <a href="{{oauth_url}}">Sign into google</a></div>
-<div *ngIf="IsAuthenticated">You ARE authenticated</div>
+<div *ngIf="isAuthenticated === false">You are NOT authenticated.  <a href="{{oAuthUrl}}">Sign into google</a></div>
+<div *ngIf="isAuthenticated">You ARE authenticated</div>
 <router-outlet></router-outlet>

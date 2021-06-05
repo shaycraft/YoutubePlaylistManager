@@ -21,15 +21,15 @@ export class VideosListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.authService.IsAuthenticated()) {
-      console.log('In videos-list.component, is authenticated, token=', this.authService.GetToken());
+    if (this.authService.isAuthenticated()) {
+      console.log('In videos-list.component, is authenticated, token=', this.authService.getToken());
     }
 
   }
 
   ngOnDestroy(): void {
     if (this.subscription) {
-      console.log('Unsubscribing...')
+      console.log('Unsubscribing...');
       this.subscription.unsubscribe();
     }
   }
@@ -42,7 +42,7 @@ export class VideosListComponent implements OnInit, OnDestroy {
     this.toastr.info('Retrieving playlist...');
     this.subscription = this.apiService.getPlaylistItems(this.playlistId, 50).subscribe((data) => {
       this.resultJson = data;
-      console.log(data)
+      console.log(data);
     }, error => this.handleError(error));
   }
 
