@@ -1,7 +1,7 @@
 import { Component, OnInit, isDevMode } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from './services/toastr.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +12,11 @@ export class AppComponent implements OnInit {
   public title = 'Youtube Playlist Manager';
   public IsAuthenticated: boolean;
   public oauth_url: string;
+  private toastr;
 
-
-  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private toastr: ToastsManager) {
-
+  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private mgr: ToastrService) {
+    // TODO:  implement ngx-toastr
+    this.toastr = mgr.manager();
     this.activatedRoute.fragment.subscribe((fragment: string) => {
       if (fragment) {
         let qstringParsed = this.parseQueryString(fragment);

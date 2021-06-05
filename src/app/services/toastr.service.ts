@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-
 @Injectable()
 export class ToastrService {
 
-  constructor(private toastr: ToastsManager) { }
+  constructor() { }
 
-  public manager(): ToastsManager {
-    return this.toastr;
+  public manager() {
+    return {
+      warn: () => {},
+      info: () => {},
+      success: () => {},
+      error: () => {},
+    };
   }
 }
