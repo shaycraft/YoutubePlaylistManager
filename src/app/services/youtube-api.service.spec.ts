@@ -1,15 +1,23 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { YoutubeApiService } from './youtube-api.service';
 
-describe('YoutubeApiService', () => {
-  beforeEach(() => {
+fdescribe('YoutubeApiService', () => {
+  let service: YoutubeApiService;
+
+  beforeEach(async () => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [YoutubeApiService]
-    });
+    }).compileComponents();
   });
 
-  it('should be created', inject([YoutubeApiService], (service: YoutubeApiService) => {
+  beforeEach(() => {
+    service = TestBed.get(YoutubeApiService);
+  })
+
+  it('should be created', () => {
     expect(service).toBeTruthy();
-  }));
+  });
 });

@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { ToastrService } from '../services/toastr.service';
+import { YoutubeApiService } from '../services/youtube-api.service';
 
 import { VideosListComponent } from './videos-list.component';
 
@@ -8,7 +11,9 @@ describe('VideosListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideosListComponent ]
+      imports: [FormsModule],
+      declarations: [ VideosListComponent ],
+      providers: [ToastrService, YoutubeApiService],
     })
     .compileComponents();
   }));

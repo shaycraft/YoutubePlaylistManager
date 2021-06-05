@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable'
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +9,7 @@ export class AuthService {
   private _authToken: string;
   private readonly validate_url: string = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this._IsAuthenticated = false;
   }
 
@@ -31,7 +32,9 @@ export class AuthService {
   }
 
   public ValidateToken(token: string): Observable<any> {
-    return this.http.get(`${this.validate_url}?access_token=${token}`)
-      .map(res => res.json());
+    return this.http.get<any>(`${this.validate_url}?access_token=${token}`)
+    .pipe(
+      map(res => res.json()),
+    )
   }
 }
