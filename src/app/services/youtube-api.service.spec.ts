@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { YoutubeApiService } from './youtube-api.service';
 
-fdescribe('YoutubeApiService', () => {
+describe('YoutubeApiService', () => {
   let service: YoutubeApiService;
 
   beforeEach(async () => {
