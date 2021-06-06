@@ -15,7 +15,7 @@ describe('YoutubeApiService', () => {
 
   beforeEach(() => {
     service = TestBed.get(YoutubeApiService);
-  })
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();

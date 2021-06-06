@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
-  private _IsAuthenticated: boolean;
+  private _isAuthenticated: boolean;
   private _authToken: string;
-  private readonly validate_url: string = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
+  private readonly _validateUrl: string = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
 
   constructor(private http: HttpClient) {
-    this._IsAuthenticated = false;
+    this._isAuthenticated = false;
   }
 
-  public IsAuthenticated(): boolean {
-    return this._IsAuthenticated;
+  public isAuthenticated(): boolean {
+    return this._isAuthenticated;
   }
 
-  public SetAuthenticated(authValue: boolean): void {
-    this._IsAuthenticated = authValue;
+  public setAuthenticated(authValue: boolean): void {
+    this._isAuthenticated = authValue;
   }
 
-  public SetToken(token: string) {
+  public setToken(token: string) {
     this._authToken = token;
-    this._IsAuthenticated = true;
+    this._isAuthenticated = true;
     console.log('SetToken, token=', token);
   }
 
-  public GetToken() {
+  public getToken() {
     return this._authToken;
   }
 
-  public ValidateToken(token: string): Observable<any> {
-    return this.http.get<any>(`${this.validate_url}?access_token=${token}`)
+  public validateToken(token: string): Observable<any> {
+    return this.http.get<any>(`${this._validateUrl}?access_token=${token}`)
     .pipe(
       map(res => res.json()),
-    )
+    );
   }
 }
