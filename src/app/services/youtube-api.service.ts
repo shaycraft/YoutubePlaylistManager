@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -14,9 +13,6 @@ export class YoutubeApiService {
   public getPlaylistItems(id: string, limit: number): Observable<any> {
     const url = `${this.baseUrl}/playlistItems?part=snippet&maxResults=${limit}&playlistId=${id}&key=${this.apiKey}`;
 
-    return this.http.get<any>(url)
-    .pipe(
-      map(response => response.json()),
-    );
+    return this.http.get<any>(url);
   }
 }

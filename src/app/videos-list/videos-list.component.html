@@ -5,7 +5,7 @@
     <span>Playlist id:</span><input [(ngModel)]="playlistId" />
     <button (click)="retrievePlaylist();">Search</button>
 </div>
-<div *ngIf="resultJson">
+<div *ngIf="resultJson$ | async">
     Result...
     <pre> 
         {{ resultJson | json }}
