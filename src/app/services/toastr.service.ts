@@ -6,10 +6,10 @@ export class ToastrService {
 
   public manager() {
     return {
-      warn: () => {},
-      info: () => {},
-      success: () => {},
-      error: () => {},
+      warn: (msg: string) => console.debug(`WARN: ${msg}`),
+      info: (msg: string) => console.debug(`INFO: ${msg}`),
+      success: (msg: string) => console.debug(`SUCCESS: ${msg}`),
+      error: (msg: string) => console.error(`ERROR-6000: ${msg}`),
     };
   }
 }

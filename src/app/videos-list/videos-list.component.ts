@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from '../services/toastr.service';
-import { Subscription } from 'rxjs/Subscription';
 import { YoutubeApiService } from '../services/youtube-api.service';
 import { AuthService } from '../services/auth.service';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-videos-list',
   templateUrl: './videos-list.component.html',
   styleUrls: ['./videos-list.component.css']
 })
-export class VideosListComponent implements OnInit, OnDestroy {
+export class VideosListComponent implements OnInit {
 
   public playlistId: string;
-  public resultJson: any;
+  public resultJson$: Observable<any>;
   private toastr: any;
-  private subscription: Subscription;
 
   constructor(private toastrService: ToastrService, private apiService: YoutubeApiService, private authService: AuthService) {
     this.toastr = this.toastrService.manager();
@@ -27,30 +27,23 @@ export class VideosListComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      console.log('Unsubscribing...');
-      this.subscription.unsubscribe();
-    }
-  }
-
   public retrievePlaylist(): void {
     if (!this.playlistId) {
       this.toastr.error('Please provide a playlist id');
       return;
     }
-    this.toastr.info('Retrieving playlist...');
-    this.subscription = this.apiService.getPlaylistItems(this.playlistId, 50).subscribe((data) => {
-      this.resultJson = data;
-      console.log(data);
-    }, error => this.handleError(error));
+
+    this.resultJson$ = this.apiService.getPlaylistItems(this.playlistId, 50)
+      .pipe(
+        map((res: any) => res.json()),
+        catchError((err: any) => this.handleError(err)),
+      );
   }
 
   handleError(message: any): any {
     console.dir(message);
-    this.toastr.error(message);
-    this.resultJson = message;
-    console.log(this.resultJson);
+    this.toastr.error(JSON.stringify(message));
+    return of(message);
   }
 
 }
