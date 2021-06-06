@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from '../services/toastr.service';
@@ -11,7 +11,7 @@ describe('VideosListComponent', () => {
   let component: VideosListComponent;
   let fixture: ComponentFixture<VideosListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, HttpClientTestingModule],
       declarations: [VideosListComponent],
