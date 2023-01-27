@@ -126,7 +126,6 @@
       }
     }
   },
-  "defaultProject": "youtube-playlist-manager",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
